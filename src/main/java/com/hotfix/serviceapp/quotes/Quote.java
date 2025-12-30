@@ -2,7 +2,6 @@ package com.hotfix.serviceapp.quotes;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hotfix.serviceapp.jobs.Job;
-import com.hotfix.serviceapp.jobs.JobStatus;
 import com.hotfix.serviceapp.users.User;
 import jakarta.persistence.*;
 
