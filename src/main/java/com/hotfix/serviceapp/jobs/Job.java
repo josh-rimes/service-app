@@ -1,7 +1,12 @@
 package com.hotfix.serviceapp.jobs;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.hotfix.serviceapp.quotes.Quote;
 import com.hotfix.serviceapp.users.User;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Job {
@@ -24,8 +29,15 @@ public class Job {
     @JoinColumn(name = "customer_id")
     private User customer;
 
+    @ManyToOne
+    private User selectedTradesman;
+
     @Enumerated(EnumType.STRING)
     private JobStatus status;
+
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Quote> quotes = new ArrayList<>();
 
     public Job() {}
 
@@ -92,5 +104,17 @@ public class Job {
 
     public void setStatus(JobStatus status) {
         this.status = status;
+    }
+
+    public List<Quote> getQuotes() {
+        return quotes;
+    }
+
+    public User getSelectedTradesman() {
+        return selectedTradesman;
+    }
+
+    public void setSelectedTradesman(User selectedTradesman) {
+        this.selectedTradesman = selectedTradesman;
     }
 }
