@@ -1,5 +1,7 @@
 package com.hotfix.serviceapp.bookings;
 
+import com.hotfix.serviceapp.users.User;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,9 +15,11 @@ public class BookingController {
     }
 
     @PostMapping
-    public Booking proposeBooking(@RequestBody CreateBookingRequestDto request,
-                                  @RequestParam Integer tradesmanId) {
-        return bookingService.proposeBooking(request, tradesmanId);
+    public Booking proposeBooking(@RequestBody CreateBookingRequestDto request) {
+
+        User tradesman = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return bookingService.proposeBooking(request, tradesman);
     }
 
     @PatchMapping("/{bookingId}")

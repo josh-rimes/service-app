@@ -3,6 +3,7 @@ package com.hotfix.serviceapp.bookings;
 import com.hotfix.serviceapp.jobs.Job;
 import com.hotfix.serviceapp.jobs.JobRepository;
 import com.hotfix.serviceapp.jobs.JobStatus;
+import com.hotfix.serviceapp.users.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,11 +17,11 @@ public class BookingService {
         this.jobRepository = jobRepository;
     }
 
-    public Booking proposeBooking(CreateBookingRequestDto request, Integer tradesmanId) {
+    public Booking proposeBooking(CreateBookingRequestDto request, User tradesman) {
 
         Job job = jobRepository.findById(request.jobId).orElseThrow(() -> new RuntimeException("Job not found"));
 
-        if (!job.getSelectedTradesman().getId().equals(tradesmanId)) {
+        if (!job.getSelectedTradesman().getId().equals(tradesman)) {
             throw new RuntimeException("Not assigned to this job");
         }
 

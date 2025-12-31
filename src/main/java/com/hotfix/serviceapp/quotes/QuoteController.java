@@ -1,5 +1,7 @@
 package com.hotfix.serviceapp.quotes;
 
+import com.hotfix.serviceapp.users.User;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,9 +17,11 @@ public class QuoteController {
     }
 
     @PostMapping
-    public Quote createQuote(@RequestBody CreateQuoteRequestDto request,
-                             @RequestParam Integer tradesmanId) {
-        return quoteService.createQuote(request,tradesmanId);
+    public Quote createQuote(@RequestBody CreateQuoteRequestDto request) {
+
+    User tradesman = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return quoteService.createQuote(request, tradesman);
     }
 
     @GetMapping("/job/{jobId}")

@@ -14,19 +14,15 @@ public class QuoteService {
 
     private final QuoteRepository quoteRepository;
     private final JobRepository jobRepository;
-    private final UserRepository userRepository;
 
     public QuoteService(QuoteRepository quoteRepository, JobRepository jobRepository, UserRepository userRepository) {
         this.quoteRepository = quoteRepository;
         this.jobRepository = jobRepository;
-        this.userRepository = userRepository;
     }
 
-    public Quote createQuote(CreateQuoteRequestDto request, Integer tradesmanId) {
+    public Quote createQuote(CreateQuoteRequestDto request, User tradesman) {
 
         Job job = jobRepository.findById(request.jobId).orElseThrow(() -> new RuntimeException("Job not found"));
-
-        User tradesman = userRepository.findById(tradesmanId).orElseThrow(() -> new RuntimeException("User not found"));
 
         if (tradesman.getRole() != Role.TRADESMAN) {
             throw new RuntimeException("Only tradesmen can quote");
