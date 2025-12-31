@@ -1,6 +1,7 @@
 package com.hotfix.serviceapp.jobs;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.hotfix.serviceapp.bookings.Booking;
 import com.hotfix.serviceapp.quotes.Quote;
 import com.hotfix.serviceapp.users.User;
 import jakarta.persistence.*;
@@ -31,6 +32,10 @@ public class Job {
 
     @ManyToOne
     private User selectedTradesman;
+
+    @OneToOne(mappedBy = "job", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Booking booking;
 
     @Enumerated(EnumType.STRING)
     private JobStatus status;
@@ -116,5 +121,9 @@ public class Job {
 
     public void setSelectedTradesman(User selectedTradesman) {
         this.selectedTradesman = selectedTradesman;
+    }
+
+    public Booking getBooking() {
+        return booking;
     }
 }
