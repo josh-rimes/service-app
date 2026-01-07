@@ -1,18 +1,140 @@
-# React + Vite
+# Frontend – Hotfix Web App
+This is the frontend for the Hotfix application, built with React and Vite.
+It communicates with the Spring Boot backend via REST APIs.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tech Stack
 
-Currently, two official plugins are available:
+- React
+- Vite
+- JavaScript
+- Axios
+- React Router
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Prerequisites
+Make sure you have:
+- Node.js (v18+ recommended)
+- npm or yarn
+- Backend running on http://localhost:8080
 
-## React Compiler
+## Setup Instructions
+### 1. Cd into repository
+```shell
+cd frontend
+```
+### 2. Install Dependencies
+```shell
+npm install
+```
+or
+```shell
+yarn install
+```
+### 3. Configure API Base URL
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Check `src/api/axios.js`:
+```javascript
+import axios from "axios";
 
-Note: This will impact Vite dev & build performances.
+const api = axios.create({
+baseURL: "http://localhost:8080",
+});
 
-## Expanding the ESLint configuration
+export default api;
+```
+Ensure it matches the backend URL.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 4. Run the Development Server
+```shell
+npm run dev
+```
+The frontend will be available at:
+```terminaloutput
+http://localhost:5173
+```
+
+## Application Structure
+
+- api/ - Axios configuration
+- components/ - Reusable UI components
+- pages/ - Page-level components
+- auth/ - Auth helpers (JWT, roles)
+- App.jsx
+
+## Authentication Flow
+**1.** User logs in
+
+**2.** JWT is returned from backend
+
+**3.** Token is stored (localStorage or context)
+
+**4.** Axios attaches token to all requests
+
+Example:
+```javascript
+api.interceptors.request.use(config => {
+const token = localStorage.getItem("token");
+if (token) {
+config.headers.Authorization = `Bearer ${token}`;
+}
+return config;
+});
+```
+
+## Common Issues & Debugging
+### Jobs / Quotes Not Loading
+**Possible causes:**
+
+- Backend not running
+- Missing JWT token
+- Incorrect API endpoint
+- 
+**Fix:**
+
+- Check Network tab in browser dev tools
+- Verify token exists in localStorage
+- Confirm endpoint URLs match backend
+
+### 401 / 403 Errors in Frontend
+
+**Causes:**
+
+- Token expired
+- User role mismatch
+- Authorization header missing
+
+**Fix:**
+
+- Log out and log back in
+- Confirm role-based routes
+- Ensure Axios interceptor is working
+
+### Undefined IDs (e.g. tradesmanId)
+If values like `quote.tradesmanId` are `undefined`:
+- Backend DTO may not include the field
+- Ensure frontend uses the DTO structure returned by backend
+- Log the API response to confirm shape
+
+### CORS Errors
+
+**Error:**
+```terminaloutput
+Access to XMLHttpRequest has been blocked by CORS policy
+```
+**Fix:**
+
+- Ensure backend CORS allows localhost:5173
+- Restart backend after changes
+
+### Blank Page on Load
+
+**Fix:**
+
+- Check console for routing errors
+- Verify React Router paths
+- Ensure correct default route
+
+## Development Tips
+- Use browser dev tools Network tab extensively
+- Log API responses while developing new features
+- Keep backend and frontend DTOs in sync
+- Restart Vite server after environment changes
