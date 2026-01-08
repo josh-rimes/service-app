@@ -115,6 +115,10 @@ public class Job {
         return quotes;
     }
 
+    public void setQuotes(List<Quote> quotes) {
+        this.quotes = quotes;
+    }
+
     public User getSelectedTradesman() {
         return selectedTradesman;
     }

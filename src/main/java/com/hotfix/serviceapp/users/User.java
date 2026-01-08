@@ -2,7 +2,6 @@ package com.hotfix.serviceapp.users;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hotfix.serviceapp.bookings.BookingRepository;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -61,6 +60,10 @@ public class User implements UserDetails {
 
 
     // todo getters/setters
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;
