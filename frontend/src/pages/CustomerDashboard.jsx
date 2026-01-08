@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import api from "../api/axios.js";
+import { AuthContext } from "../auth/AuthContext";
 
 export default function CustomerDashboard() {
     const [jobs, setJobs] = useState([]);
@@ -19,6 +20,8 @@ export default function CustomerDashboard() {
 
         fetchJobs();
     }, []);
+
+    const { logout } = useContext(AuthContext);
 
     const acceptQuote = async (jobId, quoteId) => {
         try {
@@ -156,6 +159,9 @@ export default function CustomerDashboard() {
                     ))}
                 </div>
             ))}
+            <button onClick={logout}>
+                Logout
+            </button>
         </div>
     );
 }

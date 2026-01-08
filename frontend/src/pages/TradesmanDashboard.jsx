@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import api from "../api/axios.js";
+import {AuthContext} from "../auth/AuthContext.jsx";
 
 export default function TradesmanDashboard() {
     const [jobs, setJobs] = useState([]);
@@ -7,6 +8,7 @@ export default function TradesmanDashboard() {
     const [submitting, setSubmitting] = useState(null);
 
     useEffect(() => {
+        console.log("Dashboard mounted");
         const fetchJobs = async () => {
             try {
                 const response = await api.get("/jobs");
@@ -18,6 +20,8 @@ export default function TradesmanDashboard() {
 
         fetchJobs();
     }, []);
+
+    const { logout } = useContext(AuthContext);
 
     const handleChange = (jobId, field, value) => {
         setQuoteData(prev => ({
@@ -111,6 +115,9 @@ export default function TradesmanDashboard() {
                     </div>
                 );
             })}
+            <button onClick={logout}>
+                Logout
+            </button>
         </div>
     );
 }
