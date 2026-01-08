@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
                 });
             }
         } catch (error) {
+            console.log("Failed to log in", error);
             logout();
         } finally {
             setLoading(false);

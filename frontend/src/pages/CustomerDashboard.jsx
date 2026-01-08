@@ -141,7 +141,7 @@ export default function CustomerDashboard() {
                                     style={{
                                         color:
                                             quote.status === "ACCEPTED" ? "green" :
-                                                quote.status === "REJECTED" ? "red" : "black"
+                                                getRejectedColour(quote)
                                     }}
                                 >
                   {quote.status}
@@ -164,4 +164,9 @@ export default function CustomerDashboard() {
             </button>
         </div>
     );
+
+}
+
+function getRejectedColour(quote) {
+    return quote.status === "REJECTED" ? "red" : "black";
 }
