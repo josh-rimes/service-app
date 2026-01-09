@@ -29,7 +29,7 @@ public class JobController {
 
     @GetMapping("/{id}")
     public Job getJobById(@PathVariable Integer id) {
-        return jobRepository.findById(id).orElseThrow(() -> new RuntimeException("Job Not Found"));
+        return jobRepository.findById(id).orElseThrow(() -> new RuntimeException("Job not found"));
     }
 
     @PostMapping("/{jobId}/select/{quoteId}")
