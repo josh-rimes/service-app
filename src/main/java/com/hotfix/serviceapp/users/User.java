@@ -56,6 +56,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private TradesmanProfile tradesmanProfile;
+
     private Double rating;
 
 
@@ -99,6 +102,14 @@ public class User implements UserDetails {
 
     public Role getRole() {
         return role;
+    }
+
+    public void setTradesmanProfile(TradesmanProfile tradesmanProfile) {
+        this.tradesmanProfile = tradesmanProfile;
+    }
+
+    public TradesmanProfile getTradesmanProfile() {
+        return tradesmanProfile;
     }
 
     public void setRating(Double rating) {

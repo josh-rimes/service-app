@@ -54,9 +54,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/reviews/**").hasRole("CUSTOMER")
                         .requestMatchers("/jobs/**").hasAnyRole("CUSTOMER", "TRADESMAN")
                         .requestMatchers("/quotes/**").hasAnyRole("TRADESMAN", "CUSTOMER")
-                        .requestMatchers("/reviews/**").hasAnyRole("CUSTOMER")
+                        .requestMatchers("/tradesman/**").hasRole("TRADESMAN")
                         .requestMatchers("/bookings/**").authenticated()
                         .anyRequest().authenticated()
                 )
