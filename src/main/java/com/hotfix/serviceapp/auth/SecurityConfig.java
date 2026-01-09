@@ -56,6 +56,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/jobs/**").hasAnyRole("CUSTOMER", "TRADESMAN")
                         .requestMatchers("/quotes/**").hasAnyRole("TRADESMAN", "CUSTOMER")
+                        .requestMatchers("/reviews/**").hasAnyRole("CUSTOMER")
                         .requestMatchers("/bookings/**").authenticated()
                         .anyRequest().authenticated()
                 )
