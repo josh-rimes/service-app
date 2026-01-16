@@ -1,6 +1,9 @@
 import {useContext, useEffect, useState} from "react";
-import api from "../api/axios.js";
-import { AuthContext } from "../auth/AuthContext";
+import api from "../../api/axios.js";
+import { AuthContext } from "../../auth/AuthContext.jsx";
+import styles from "./CustomerDashboard.module.css"
+import Button from "../../components/Button/Button.jsx";
+import Card from "../../components/Card/Card.jsx";
 
 export default function CustomerDashboard() {
     const [jobs, setJobs] = useState([]);
@@ -79,33 +82,32 @@ export default function CustomerDashboard() {
     };
 
     return (
-        <div>
-            <h2>Post a New Job</h2>
-            <div style={{ border: "1px solid #ccc", padding: "1rem", marginBottom: "2rem" }}>
+        <div className={styles.dashboard}>
+            <Button variant="logout" onClick={logout}>
+                Logout
+            </Button>
+
+            <Card title={<h2>Post a New Job</h2>}>
                 <input
                     type="text"
                     placeholder="Job Title"
                     value={newJob.title}
                     onChange={e => setNewJob(prev => ({ ...prev, title: e.target.value }))}
-                    style={{ width: "100%", marginBottom: "5px" }}
                 />
                 <textarea
                     placeholder="Job Description"
                     value={newJob.description}
                     onChange={e => setNewJob(prev => ({ ...prev, description: e.target.value }))}
-                    style={{ width: "100%", height: "60px", marginBottom: "5px" }}
                 />
                 <input
                     type="text"
                     placeholder="Location"
                     value={newJob.location}
                     onChange={e => setNewJob(prev => ({ ...prev, location: e.target.value }))}
-                    style={{ width: "100%", marginBottom: "5px" }}
                 />
                 <select
                     value={newJob.urgency}
                     onChange={e => setNewJob(prev => ({ ...prev, urgency: e.target.value }))}
-                    style={{ marginBottom: "5px" }}
                 >
                     <option value="ASAP">ASAP</option>
                     <option value="TODAY">Today</option>
@@ -113,55 +115,48 @@ export default function CustomerDashboard() {
                     <option value="FLEXIBLE">Flexible</option>
                 </select>
                 <br />
-                <button onClick={postJob} disabled={posting}>
+                <Button onClick={postJob} disabled={posting}>
                     {posting ? "Posting..." : "Post Job"}
-                </button>
-            </div>
+                </Button>
+            </Card>
 
             <h2>My Jobs</h2>
             {jobs.length === 0 && <p>You have not posted any jobs.</p>}
 
             {jobs.map(job => (
-                <div key={job.id} style={{ border: "1px solid #ccc", padding: "1rem", marginBottom: "1rem" }}>
-                    <h4>{job.title}</h4>
+                <Card key={job.id} title={job.title}>
                     <p>{job.description}</p>
                     <p><strong>Status:</strong> {job.status}</p>
 
-                    <h5>Quotes</h5>
+                    <p><strong>Quotes:</strong></p>
                     {(!job.quotes || job.quotes.length === 0) && <p>No quotes yet.</p>}
 
                     {job.quotes?.map(quote => (
-                        <div key={quote.id} style={{ marginBottom: "0.5rem" }}>
-                            <p><strong>Tradesman ID:</strong> {quote.tradesmanId?.name || "Unknown"}</p>
-                            <p><strong>Price:</strong> £{quote.price}</p>
+                        <Card key={quote.id}>
+                            <p><strong>Tradesman:</strong> {quote.tradesman?.name || "Unknown"}</p>
+                            <p>
+                            <strong>Price:</strong>{" "}
+                            {quote.priceEstimate == null ? "Unspecified" : `£${quote.priceEstimate}`}
+                            </p>
                             <p>{quote.message}</p>
                             <p>
                                 <strong>Status:</strong>{" "}
-                                <span
-                                    style={{
-                                        color:
-                                            quote.status === "ACCEPTED" ? "green" :
-                                                getRejectedColour(quote)
-                                    }}
-                                >
-                  {quote.status}
-                </span>
+                                <span style={{color: quote.status === "ACCEPTED" ? "green" : getRejectedColour(quote)}}>
+                                    {quote.status}
+                                </span>
                             </p>
                             {quote.status === "PENDING" && (
-                                <button
+                                <Button
                                     onClick={() => acceptQuote(job.id, quote.id)}
                                     disabled={accepting === quote.id}
                                 >
                                     {accepting === quote.id ? "Accepting..." : "Accept Quote"}
-                                </button>
+                                </Button>
                             )}
-                        </div>
+                        </Card>
                     ))}
-                </div>
+                </Card>
             ))}
-            <button onClick={logout}>
-                Logout
-            </button>
         </div>
     );
 

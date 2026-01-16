@@ -1,8 +1,28 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+h2 {
+  margin-top: 0;
+  color: #444;
+  margin-bottom: 15px;
+  font-size: 18px;
+  padding-bottom: 6px;
+}
+
+section {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 40px;
+}
+
+p {
+  margin: 4px 0;
+  color: #444;
 }
 
 .logo {

@@ -1,0 +1,61 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fafafa;
+    max-width: 500px;
+}
+
+.title {
+    margin: 0 0 10px 0;
+}
+
+.actions {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.title h2 {
+    color: #444;
+}
+
+.card p {
+    margin: 20px 0;
+    color: #444;
+}
+
+.card input {
+    width: 300px;
+    padding: 8px;
+    margin: 4px auto 20px auto;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.card textarea {
+    min-height: 80px;
+    overflow: auto;
+    resize: vertical;
+    width: 470px;
+    padding: 8px;
+    margin: 4px auto 20px auto;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.card select {
+    width: 200px;
+    padding: 8px;
+    margin: 4px auto 20px auto;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.card button {
+    display: block;
+    margin: 30px auto 20px auto;
+}

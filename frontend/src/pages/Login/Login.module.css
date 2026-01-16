@@ -1,0 +1,36 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    height: 900px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login h2 {
+    margin-bottom: 50px;
+    font-size: 40px;
+    color: #ffffff;
+}
+
+.twoColumns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.twoColumns input {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    width: 200px;
+    font-size: 16px;
+    color: #1a1a1a;
+}

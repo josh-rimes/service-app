@@ -1,9 +1,10 @@
 import {AuthProvider} from "./auth/AuthContext.jsx";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
-import Login from "./auth/Login";
+import Login from "./pages/Login/Login.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
-import CustomerDashboard from "./pages/CustomerDashboard";
-import TradesmanDashboard from "./pages/TradesmanDashboard";
+import CustomerDashboard from "./pages/CustomerDashboard/CustomerDashboard.jsx";
+import TradesmanDashboard from "./pages/TradesmanDashboard/TradesmanDashboard.jsx";
+import TradesmanProfile from "./pages/TradesmanProfile/TradesmanProfile.jsx";
 
 
 function App() {
@@ -30,6 +31,14 @@ function App() {
                         <ProtectedRoute role="TRADESMAN">
                             <TradesmanDashboard />
                         </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/tradesman/profile"
+                        element={
+                            <ProtectedRoute role="TRADESMAN">
+                                <TradesmanProfile />
+                            </ProtectedRoute>
                         }
                     />
                 </Routes>

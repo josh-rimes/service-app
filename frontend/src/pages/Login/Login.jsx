@@ -1,6 +1,8 @@
-import {useAuth} from "./AuthContext.jsx";
+import {useAuth} from "../../auth/AuthContext.jsx";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import styles from "./Login.module.css"
+import Button from "../../components/Button/Button.jsx";
 
 
 export default function Login() {
@@ -23,11 +25,13 @@ export default function Login() {
     };
 
     return (
-        <div>
-            <h2>Login</h2>
-            <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
-            <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-            <button onClick={handleLogin}>Login</button>
+        <div className={styles.login}>
+            <h2>Log into Hotfix</h2>
+            <div className={styles.twoColumns}>
+                <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
+                <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+            </div>
+            <Button onClick={handleLogin}>Login</Button>
         </div>
     );
 };

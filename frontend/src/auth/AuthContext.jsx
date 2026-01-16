@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import api from "../api/axios";
 
 export const AuthContext = createContext(null);
@@ -21,10 +21,14 @@ export const AuthProvider = ({ children }) => {
             if (payload.exp * 1000 < Date.now()) {
                 logout();
             } else {
-                setUser({
+                const userData = {
+                    id: payload.id,
                     email: payload.sub,
                     role: payload.role,
-                });
+                };
+
+                setUser(userData);
+                localStorage.setItem("user", JSON.stringify(userData));
             }
         } catch (error) {
             console.log("Failed to log in", error);
@@ -36,16 +40,27 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         const response = await api.post("/auth/login", { email, password });
-        localStorage.setItem("token", response.data);
+        const token = response.data;
 
-        const payload = JSON.parse(atob(response.data.split(".")[1]));
-        setUser({ email: payload.sub, role: payload.role });
+        localStorage.setItem("token", token);
+
+        const payload = JSON.parse(atob(token.split(".")[1]));
+
+        const userData = {
+            id: payload.id,
+            email: payload.sub,
+            role: payload.role,
+        };
+
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
 
         return payload.role;
     };
 
     const logout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
         setUser(null);
         setLoading(false);
     };
