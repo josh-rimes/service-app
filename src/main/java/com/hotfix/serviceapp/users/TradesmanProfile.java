@@ -1,5 +1,6 @@
 package com.hotfix.serviceapp.users;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class TradesmanProfile {
     private Integer id;
 
     @OneToOne
+    @JsonManagedReference
     private User user;
 
     private String bio;
