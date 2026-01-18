@@ -9,10 +9,14 @@
     padding: 20px;
 }
 
+.login img {
+    margin-bottom: 30px;
+}
+
 .login h2 {
     margin-bottom: 50px;
     font-size: 40px;
-    color: #ffffff;
+    color: #ebe7d9;
 }
 
 .twoColumns {

@@ -1,14 +1,15 @@
 .card {
-    border: 1px solid #ddd;
+    border: 2px solid #e4e1d2;
     border-radius: 6px;
     padding: 15px;
     margin-bottom: 15px;
-    background-color: #fafafa;
+    background-color: #ebe7d9;
     max-width: 500px;
 }
 
 .title {
     margin: 0 0 10px 0;
+    color: #444;
 }
 
 .actions {
@@ -30,7 +31,7 @@
     padding: 8px;
     margin: 4px auto 20px auto;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid #e4e1d2;
     font-size: 14px;
 }
 
@@ -42,7 +43,7 @@
     padding: 8px;
     margin: 4px auto 20px auto;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid #e4e1d2;
     font-size: 14px;
 }
 
@@ -51,7 +52,7 @@
     padding: 8px;
     margin: 4px auto 20px auto;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid #e4e1d2;
     font-size: 14px;
 }
 

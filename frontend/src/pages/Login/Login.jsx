@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import styles from "./Login.module.css"
 import Button from "../../components/Button/Button.jsx";
+import logo from "../../assets/full_logo.png";
 
 
 export default function Login() {
@@ -26,11 +27,12 @@ export default function Login() {
 
     return (
         <div className={styles.login}>
-            <h2>Log into Hotfix</h2>
+            <img src={logo} alt="HotFix logo" />
             <div className={styles.twoColumns}>
                 <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
                 <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
             </div>
+
             <Button onClick={handleLogin}>Login</Button>
         </div>
     );

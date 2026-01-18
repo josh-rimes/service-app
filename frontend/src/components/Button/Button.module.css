@@ -1,4 +1,5 @@
 .button {
+    margin-top: 30px;
     padding: 8px 14px;
     border-radius: 4px;
     border: none;
@@ -7,21 +8,21 @@
 }
 
 .primary {
-    background-color: #2c7be5;
+    background-color: #064b75;
     color: #ffffff;
 }
 
 .primary:hover {
-    background-color: #1a68d1;
+    background-color: #064265;
 }
 
 .logout {
-    background-color: #e5533d;
+    background-color: #ba3521;
     color: #ffffff;
 }
 
 .logout:hover {
-    background-color: #c94430;
+    background-color: #a62f1e;
     color: #ffffff;
 }
 
