@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface JobRepository extends JpaRepository<Job, Integer> {
     List<Job> findByStatus(JobStatus status);
+
+    List<Job> findByCustomerId(Integer customerId);
 }

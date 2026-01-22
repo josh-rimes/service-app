@@ -5,6 +5,8 @@ import com.hotfix.serviceapp.quotes.QuoteRepository;
 import com.hotfix.serviceapp.quotes.QuoteStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class JobService {
 
@@ -40,5 +42,9 @@ public class JobService {
         job.setSelectedTradesman(selectedQuote.getTradesman());
 
         return jobRepository.save(job);
+    }
+
+    public List<Job> findByCustomerId(Integer customerID) {
+        return jobRepository.findByCustomerId(customerID);
     }
 }

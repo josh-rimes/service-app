@@ -4,17 +4,20 @@ import { AuthContext } from "../../auth/AuthContext.jsx";
 import styles from "./CustomerDashboard.module.css"
 import Button from "../../components/Button/Button.jsx";
 import Card from "../../components/Card/Card.jsx";
+import Empty from "../../components/Empty/Empty.jsx";
 
 export default function CustomerDashboard() {
+    const { user } = useContext(AuthContext);
+
     const [jobs, setJobs] = useState([]);
     const [accepting, setAccepting] = useState(null);
-    const [newJob, setNewJob] = useState({ title: "", description: "", location: "", urgency: "NORMAL" });
+    const [newJob, setNewJob] = useState({ customer: user, title: "", description: "", location: "", urgency: "NORMAL" });
     const [posting, setPosting] = useState(false);
 
     useEffect(() => {
         const fetchJobs = async () => {
             try {
-                const res = await api.get("/jobs");
+                const res = await api.get(`/jobs/customer/${user.id}`);
                 setJobs(res.data);
             } catch (err) {
                 console.error("Failed to load jobs", err);
@@ -64,6 +67,7 @@ export default function CustomerDashboard() {
 
         try {
             setPosting(true);
+
             const res = await api.post("/jobs", newJob);
             alert("Job posted successfully");
 
@@ -121,7 +125,7 @@ export default function CustomerDashboard() {
             </Card>
 
             <h2>My Jobs</h2>
-            {jobs.length === 0 && <p>You have not posted any jobs.</p>}
+            {jobs.length === 0 && <Empty>You have not posted any jobs.</Empty>}
 
             {jobs.map(job => (
                 <Card key={job.id} title={job.title}>
