@@ -9,7 +9,7 @@
     margin: 0 auto 20px auto;
 }
 
-p {
+.dashboard p {
     margin: 4px 0;
     color: #444;
 }
@@ -25,7 +25,8 @@ p {
 
 .threeColumns section {
     background-color: #faf7ed;
-    border: 2px solid #ebe7d9;
+    border: 2px solid #555555;
+    box-shadow: 3px 3px 0 #555555;
     border-radius: 6px;
     padding: 15px;
     min-height: 300px;

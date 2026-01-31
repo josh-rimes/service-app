@@ -2,9 +2,10 @@ import {useContext, useEffect, useState} from "react";
 import api from "../../api/axios.js";
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../../auth/AuthContext.jsx";
-
 import styles from "./TradesmanProfile.module.css";
 import Button from "../../components/Button/Button.jsx";
+import Input from "../../components/Input/Input.jsx";
+import TextArea from "../../components/TextArea/TextArea.jsx";
 import Card from "../../components/Card/Card.jsx";
 import Empty from "../../components/Empty/Empty.jsx";
 
@@ -51,27 +52,29 @@ export default function TradesmanProfile() {
 
             <Card title={<h2>My Profile</h2>}>
                 <h4>Bio</h4>
-                <textarea
-                    placeholder="Bio..."
-                    value={profile.bio}
-                    onChange={(e) => setProfile({ ...profile, bio: e.target.value })
-                }/>
+                <div className={styles.bio}>
+                    <TextArea
+                        placeholder="Write your bio here..."
+                        value={profile.bio}
+                        onChange={(e) => setProfile({ ...profile, bio: e.target.value })
+                    }/>
+                </div>
 
                 <h4>Skills</h4>
-                <input
-                    placeholder="Skills"
+                <Input
+                    placeholder="Enter your skills here..."
                     value={profile.skills}
                     onChange={(e) => setProfile({ ...profile, skills: e.target.value })
                 }/>
 
                 <h4>Location</h4>
-                <input
-                    placeholder="Location"
+                <Input
+                    placeholder="Enter your location here..."
                     value={profile.location}
                     onChange={(e) => setProfile({ ...profile, location: e.target.value })
                 }/>
 
-                <Button onClick={save}>Save profile</Button>
+                <Button variant={"light"} onClick={save}>Save profile</Button>
             </Card>
 
             <Card title={<h2>Reviews</h2>}>

@@ -14,6 +14,7 @@
 }
 
 .login img {
+    max-width: 300px;
     margin-bottom: 30px;
 }
 
@@ -31,16 +32,6 @@
     align-items: center;
     max-width: 500px;
     margin: 0 auto;
-}
-
-.twoColumns input {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 15px;
-    width: 200px;
-    font-size: 16px;
-    color: #1a1a1a;
 }
 
 .register {

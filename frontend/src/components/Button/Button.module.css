@@ -1,32 +1,54 @@
 .button {
-    margin-top: 30px;
-    padding: 8px 14px;
-    border-radius: 4px;
-    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 20px;
+    margin: 30px 20px 30px 20px;
 }
 
-.primary {
+.button:active {
+    box-shadow: none;
+    transform: translate(3px, 3px);
+}
+
+.dark {
+    color: #faf7ed;
     background-color: #064b75;
-    color: #ffffff;
+    border: 2px solid #faf7ed;
+    box-shadow: 3px 3px #faf7ed;
 }
 
-.primary:hover {
+.dark:hover {
     background-color: #064265;
 }
 
+.light {
+    color: #064b75;
+    background-color: #faf7ed;
+    border: 2px solid #064b75;
+    box-shadow: 3px 3px #064b75;
+}
+
+.light:hover {
+    background-color: #e4e1d2;
+}
+
 .logout {
+    color: #faf7ed;
     background-color: #ba3521;
-    color: #ffffff;
+    border: 2px solid #faf7ed;
+    box-shadow: 3px 3px #faf7ed;
 }
 
 .logout:hover {
     background-color: #a62f1e;
-    color: #ffffff;
 }
 
 .button:disabled {
-    background-color: #aaa;
+    background-color: #444444;
+    border: 2px solid #faf7ed;
+    box-shadow: 3px 3px #faf7ed;
     cursor: not-allowed;
 }

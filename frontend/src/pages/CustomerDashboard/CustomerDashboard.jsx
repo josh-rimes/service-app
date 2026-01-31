@@ -3,6 +3,9 @@ import api from "../../api/axios.js";
 import { AuthContext } from "../../auth/AuthContext.jsx";
 import styles from "./CustomerDashboard.module.css"
 import Button from "../../components/Button/Button.jsx";
+import Input from "../../components/Input/Input.jsx";
+import TextArea from "../../components/TextArea/TextArea.jsx";
+import Select from "../../components/Select/Select.jsx";
 import Card from "../../components/Card/Card.jsx";
 import Empty from "../../components/Empty/Empty.jsx";
 
@@ -92,24 +95,31 @@ export default function CustomerDashboard() {
             </Button>
 
             <Card title={<h2>Post a New Job</h2>}>
-                <input
-                    type="text"
+                <h4>Title</h4>
+                <Input
                     placeholder="Job Title"
                     value={newJob.title}
                     onChange={e => setNewJob(prev => ({ ...prev, title: e.target.value }))}
                 />
-                <textarea
-                    placeholder="Job Description"
-                    value={newJob.description}
-                    onChange={e => setNewJob(prev => ({ ...prev, description: e.target.value }))}
-                />
-                <input
-                    type="text"
+
+                <h4>Description</h4>
+                <div className={styles.description}>
+                    <TextArea
+                        placeholder="Job Description"
+                        value={newJob.description}
+                        onChange={e => setNewJob(prev => ({ ...prev, description: e.target.value }))}
+                    />
+                </div>
+
+                <h4>Location</h4>
+                <Input
                     placeholder="Location"
                     value={newJob.location}
                     onChange={e => setNewJob(prev => ({ ...prev, location: e.target.value }))}
                 />
-                <select
+
+                <h4>Urgency</h4>
+                <Select
                     value={newJob.urgency}
                     onChange={e => setNewJob(prev => ({ ...prev, urgency: e.target.value }))}
                 >
@@ -117,9 +127,9 @@ export default function CustomerDashboard() {
                     <option value="TODAY">Today</option>
                     <option value="THIS_WEEK">This Week</option>
                     <option value="FLEXIBLE">Flexible</option>
-                </select>
+                </Select>
                 <br />
-                <Button onClick={postJob} disabled={posting}>
+                <Button variant={"light"} onClick={postJob} disabled={posting}>
                     {posting ? "Posting..." : "Post Job"}
                 </Button>
             </Card>

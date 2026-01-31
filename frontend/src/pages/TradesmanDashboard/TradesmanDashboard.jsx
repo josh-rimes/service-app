@@ -4,6 +4,8 @@ import {AuthContext} from "../../auth/AuthContext.jsx";
 import styles from "./TradesmanDashboard.module.css";
 import {useNavigate} from "react-router-dom";
 import Button from "../../components/Button/Button.jsx";
+import TextArea from "../../components/TextArea/TextArea.jsx";
+import Input from "../../components/Input/Input.jsx";
 import Card from "../../components/Card/Card.jsx";
 import Empty from "../../components/Empty/Empty.jsx";
 
@@ -110,7 +112,7 @@ export default function TradesmanDashboard() {
                                 <p><strong>Location:</strong> {job.location}</p>
                                 <p><strong>Urgency:</strong> {job.urgency}</p>
 
-                                <input
+                                <Input
                                     type="number"
                                     placeholder="Price (£)"
                                     value={quoteData[job.id]?.price || ""}
@@ -118,7 +120,7 @@ export default function TradesmanDashboard() {
                                     style={{ width: "100px", marginBottom: "5px" }}
                                 />
                                 <br />
-                                <textarea
+                                <TextArea
                                     placeholder="Message to customer (optional)"
                                     value={quoteData[job.id]?.message || ""}
                                     onChange={e => handleChange(job.id, "message", e.target.value)}

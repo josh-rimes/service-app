@@ -9,5 +9,10 @@
 
 .profile > button {
     display: block;
-    margin: 0 auto 20px auto;
+    margin: auto auto 20px auto;
 }
+
+.bio {
+    width: 400px;
+}
+

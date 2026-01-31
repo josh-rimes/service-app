@@ -1,0 +1,38 @@
+.input {
+    max-width: 400px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    outline: none;
+    transition: ease 0.25s;
+    margin: auto;
+}
+
+.input:focus {
+    transform: translate(-3px, -3px);
+}
+
+.light {
+    border: 1.5px solid #064b75;
+    box-shadow: 3px 3px 0 #064b75;
+    background-color: #faf7ed;
+}
+
+.light:focus {
+    box-shadow: 5.5px 7px 0 #064b75;
+}
+
+.dark {
+    border: 1.5px solid #faf7ed;
+    box-shadow: 3px 3px 0 #faf7ed;
+    background-color: #064b75;
+}
+
+.dark:focus {
+    box-shadow: 5.5px 7px 0 #faf7ed;
+}
+
+.input:disabled {
+    background-color: #444444;
+    cursor: not-allowed;
+}

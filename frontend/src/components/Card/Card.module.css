@@ -1,5 +1,6 @@
 .card {
-    border: 2px solid #e4e1d2;
+    border: 2px solid #555555;
+    box-shadow: 3px 3px 0 #555555;
     border-radius: 6px;
     padding: 15px;
     margin-bottom: 15px;
@@ -24,36 +25,6 @@
 .card p {
     margin: 20px 0;
     color: #444;
-}
-
-.card input {
-    width: 300px;
-    padding: 8px;
-    margin: 4px auto 20px auto;
-    border-radius: 4px;
-    border: 1px solid #e4e1d2;
-    font-size: 14px;
-}
-
-.card textarea {
-    min-height: 80px;
-    overflow: auto;
-    resize: vertical;
-    width: 470px;
-    padding: 8px;
-    margin: 4px auto 20px auto;
-    border-radius: 4px;
-    border: 1px solid #e4e1d2;
-    font-size: 14px;
-}
-
-.card select {
-    width: 200px;
-    padding: 8px;
-    margin: 4px auto 20px auto;
-    border-radius: 4px;
-    border: 1px solid #e4e1d2;
-    font-size: 14px;
 }
 
 .card button {

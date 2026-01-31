@@ -3,6 +3,8 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import styles from "./Register.module.css"
 import Button from "../../components/Button/Button.jsx";
+import Select from "../../components/Select/Select.jsx";
+import Input from "../../components/Input/Input.jsx";
 import logo from "../../assets/full_logo.png";
 
 
@@ -25,14 +27,14 @@ export default function Register() {
         <div className={styles.register}>
             <img src={logo} alt="HotFix logo" />
             <div className={styles.oneColumn}>
-                <input placeholder="Name" onChange={e => setName(e.target.value)} />
-                <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
-                <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-                <select onChange={e => setRole(e.target.value)}>
+                <Input placeholder="Name" onChange={e => setName(e.target.value)} />
+                <Input placeholder="Email" onChange={e => setEmail(e.target.value)} />
+                <Input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+                <Select onChange={e => setRole(e.target.value)}>
                     <option value="">Select account type...</option>
                     <option value="CUSTOMER">Customer</option>
                     <option value="TRADESMAN">Tradesman</option>
-                </select>
+                </Select>
             </div>
 
             <Button onClick={handleRegister}>Register</Button>
