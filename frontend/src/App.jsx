@@ -1,6 +1,7 @@
 import {AuthProvider} from "./auth/AuthContext.jsx";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import Login from "./pages/Login/Login.jsx";
+import Register from "./pages/Register/Register.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import CustomerDashboard from "./pages/CustomerDashboard/CustomerDashboard.jsx";
 import TradesmanDashboard from "./pages/TradesmanDashboard/TradesmanDashboard.jsx";
@@ -15,6 +16,8 @@ function App() {
                     <Route path="/" element={<Navigate to="/login" />} />
 
                     <Route path="/login" element={<Login />} />
+
+                    <Route path="/register" element={<Register />} />
 
                     <Route
                         path="/customer"

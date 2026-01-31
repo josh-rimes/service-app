@@ -34,6 +34,13 @@ export default function Login() {
             </div>
 
             <Button onClick={handleLogin}>Login</Button>
+
+            <div className={styles.register}>
+                <p>Click here to create an account:</p>
+                <Button onClick={() => navigate("/register")}>
+                    Register
+                </Button>
+            </div>
         </div>
     );
 };

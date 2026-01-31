@@ -58,6 +58,10 @@ export const AuthProvider = ({ children }) => {
         return payload.role;
     };
 
+    const register = async (name, email, password, role) => {
+        const response = await api.post("/auth/register", { name, email, password, role });
+    };
+
     const logout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
@@ -66,7 +70,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, login, logout }}>
+        <AuthContext.Provider value={{ user, loading, login, register, logout }}>
             {children}
         </AuthContext.Provider>
     );

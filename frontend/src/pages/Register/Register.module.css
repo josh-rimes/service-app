@@ -1,31 +1,31 @@
-.login {
+.register {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    height: 900px;
     text-align: center;
     align-items: center;
     justify-content: center;
     padding: 20px;
 }
 
-.login p {
-    color: #faf7ed;
-}
-
-.login img {
+.register img {
+    max-width: 400px;
     margin-bottom: 30px;
 }
 
-.login h2 {
+.register p {
+    color: #faf7ed;
+}
+
+.register h2 {
     margin-bottom: 50px;
     font-size: 40px;
     color: #ebe7d9;
 }
 
-.twoColumns {
+.oneColumn {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 20px;
     justify-items: center;
     align-items: center;
@@ -33,8 +33,8 @@
     margin: 0 auto;
 }
 
-.twoColumns input {
-    background-color: #fff;
+.register input {
+    background-color: #faf7ed;
     border: 1px solid #ddd;
     border-radius: 6px;
     padding: 15px;
@@ -43,10 +43,20 @@
     color: #1a1a1a;
 }
 
-.register {
+.register select {
+    background-color: #faf7ed;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    width: 200px;
+    font-size: 16px;
+}
+
+.login {
     margin-top: 20px;
 }
 
-.register button {
+.login button {
    margin-top: 0px;
+   margin-bottom: 20px;
 }
