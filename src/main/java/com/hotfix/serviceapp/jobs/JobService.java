@@ -38,7 +38,7 @@ public class JobService {
             }
         }
 
-        job.setStatus(JobStatus.QUOTED);
+        job.setStatus(JobStatus.ASSIGNED);
         job.setSelectedTradesman(selectedQuote.getTradesman());
 
         return jobRepository.save(job);

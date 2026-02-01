@@ -82,12 +82,12 @@ export default function TradesmanDashboard() {
 
     const quotedJobs = jobs.filter(job => {
         const q = myQuote(job);
-        return q && q.status === "PENDING";
+        return q?.status === "PENDING";
     });
 
     const acceptedJobs = jobs.filter(job => {
         const q = myQuote(job);
-        return q && q.status === "ACCEPTED";
+        return q?.status === "ACCEPTED";
     });
 
     return (
@@ -115,8 +115,8 @@ export default function TradesmanDashboard() {
                                 <Input
                                     type="number"
                                     placeholder="Price (£)"
-                                    value={quoteData[job.id]?.price || ""}
-                                    onChange={e => handleChange(job.id, "price", e.target.value)}
+                                    value={quoteData[job.id]?.priceEstimate || ""}
+                                    onChange={e => handleChange(job.id, "priceEstimate", e.target.value)}
                                     style={{ width: "100px", marginBottom: "5px" }}
                                 />
                                 <br />

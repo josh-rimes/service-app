@@ -2,9 +2,9 @@ package com.hotfix.serviceapp.quotes;
 
 import com.hotfix.serviceapp.jobs.Job;
 import com.hotfix.serviceapp.jobs.JobRepository;
+import com.hotfix.serviceapp.jobs.JobStatus;
 import com.hotfix.serviceapp.users.Role;
 import com.hotfix.serviceapp.users.User;
-import com.hotfix.serviceapp.users.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class QuoteService {
     private final QuoteRepository quoteRepository;
     private final JobRepository jobRepository;
 
-    public QuoteService(QuoteRepository quoteRepository, JobRepository jobRepository, UserRepository userRepository) {
+    public QuoteService(QuoteRepository quoteRepository, JobRepository jobRepository) {
         this.quoteRepository = quoteRepository;
         this.jobRepository = jobRepository;
     }
@@ -32,6 +32,9 @@ public class QuoteService {
                 .ifPresent(_ -> {
                     throw new RuntimeException("Quote assigned to your account already exists");
                 });
+
+        job.setStatus(JobStatus.QUOTED);
+        jobRepository.save(job);
 
         Quote quote = new Quote();
         quote.setJob(job);
