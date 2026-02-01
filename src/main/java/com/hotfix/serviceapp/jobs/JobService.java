@@ -31,10 +31,12 @@ public class JobService {
         }
 
         selectedQuote.setStatus(QuoteStatus.ACCEPTED);
+        quoteRepository.save(selectedQuote);
 
         for (Quote quote : job.getQuotes()) {
             if (!quote.getId().equals(quoteId)) {
                 quote.setStatus(QuoteStatus.REJECTED);
+                quoteRepository.save(quote);
             }
         }
 

@@ -41,14 +41,18 @@ export default function CustomerDashboard() {
             alert("Quote accepted");
 
             setJobs(prevJobs =>
-                prevJobs.map(job => ({
-                    ...job,
-                    quotes: job.quotes.map(q =>
-                        q.id === quoteId
-                            ? { ...q, status: "ACCEPTED" }
-                            : { ...q, status: "REJECTED" }
-                    )
-                }))
+                prevJobs.map(job =>
+                    job.id === jobId
+                        ? {
+                            ...job,
+                            quotes: job.quotes.map(q =>
+                                q.id === quoteId
+                                    ? { ...q, status: "ACCEPTED" }
+                                    : { ...q, status: "REJECTED" }
+                            )
+                        }
+                        : job
+                )
             );
         } catch (err) {
             console.error("Failed to accept quote", err);
