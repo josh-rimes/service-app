@@ -63,6 +63,8 @@ The goal of Hotfix is to streamline the entire job-to-booking flow in one simple
 This project implements the **core end-to-end functionality** of a trades marketplace:
 job posting → quoting → acceptance → booking → review.
 
+My next steps include refining and bug fixing before a stable user-ready version is released.
+
 It is designed as a clean, modular foundation in the hope that it can be extended with features like messaging, payments, or notifications.
 
 ---
@@ -76,3 +78,22 @@ It is designed as a clean, modular foundation in the hope that it can be extende
 ---
 
 Happy fixing with **Hotfix** 🔧
+
+---
+
+## Gallery (v0.1):
+
+<img width="1875" height="920" alt="Screenshot 2026-02-01 212154" src="https://github.com/user-attachments/assets/4029b8c2-70a4-4a5d-b185-07f87af11eba" />
+
+---
+
+<img width="1859" height="918" alt="Screenshot 2026-02-01 214402" src="https://github.com/user-attachments/assets/f37129b2-93be-46d7-bbfc-001803fe5e5f" />
+
+---
+
+<img width="1858" height="919" alt="Screenshot 2026-02-01 215201" src="https://github.com/user-attachments/assets/631244d4-0523-425c-96fb-316b5383a23e" />
+
+---
+
+<img width="1857" height="918" alt="Screenshot 2026-02-01 215055" src="https://github.com/user-attachments/assets/8e22b3b3-eebc-4e3c-b72b-ea667dd710ea" />
+
