@@ -1,0 +1,26 @@
+.select {
+    max-width: 400px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    outline: none;
+    margin: auto;
+}
+
+.light {
+    color: #444444;
+    border: 1.5px solid #064b75;
+    box-shadow: 3px 3px 0 #064b75;
+    background-color: #faf7ed;
+}
+
+.dark {
+    border: 1.5px solid #faf7ed;
+    box-shadow: 3px 3px 0 #faf7ed;
+    background-color: #064b75;
+}
+
+.select:disabled {
+    background-color: #444444;
+    cursor: not-allowed;
+}

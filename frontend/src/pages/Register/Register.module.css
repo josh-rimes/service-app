@@ -1,0 +1,43 @@
+.register {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.register img {
+    max-width: 300px;
+    margin-bottom: 30px;
+}
+
+.register p {
+    color: #faf7ed;
+}
+
+.register h2 {
+    margin-bottom: 50px;
+    font-size: 40px;
+    color: #ebe7d9;
+}
+
+.oneColumn {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.login {
+    margin-top: 20px;
+}
+
+.login button {
+   margin-top: 0px;
+   margin-bottom: 20px;
+}

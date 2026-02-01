@@ -1,0 +1,48 @@
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.dashboard > button {
+    display: block;
+    margin: 0 auto 20px auto;
+}
+
+.dashboard p {
+    margin: 20px auto 20px auto;
+    color: #444;
+}
+
+.threeColumns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.threeColumns section {
+    background-color: #faf7ed;
+    border: 2px solid #555555;
+    box-shadow: 3px 3px 0 #555555;
+    border-radius: 6px;
+    padding: 15px;
+    min-height: 300px;
+    margin-bottom: 40px;
+}
+
+.threeColumns section h2 {
+    margin-top: 0;
+    color: #444;
+    margin-bottom: 15px;
+    font-size: 18px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 6px;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 15px;
+}

@@ -1,0 +1,43 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    height: 900px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login p {
+    color: #faf7ed;
+}
+
+.login img {
+    max-width: 300px;
+    margin-bottom: 30px;
+}
+
+.login h2 {
+    margin-bottom: 50px;
+    font-size: 40px;
+    color: #ebe7d9;
+}
+
+.twoColumns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.register {
+    margin-top: 20px;
+}
+
+.register button {
+   margin-top: 0px;
+}
