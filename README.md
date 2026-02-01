@@ -1,142 +1,78 @@
-# Backend – Hotfix API
-This is the backend REST API for the Hotfix application.
-It is built with Spring Boot, uses JWT authentication, and connects to a relational database.
+# 🔧 Hotfix
 
+Hotfix is a full-stack web application that connects customers with skilled tradespeople. Customers can post jobs, receive quotes, and book services, while tradesmen can manage jobs, submit quotes, and showcase their profiles.
+
+The goal of Hotfix is to streamline the entire job-to-booking flow in one simple platform.
+
+---
 
 ## Tech Stack
-- Java 17+
-- Spring Boot
-- Spring Security (JWT)
-- JPA / Hibernate
-- PostgreSQL (or H2 for local testing)
-- Maven
 
-## Prerequisites
-Make sure you have the following installed:
-- Java JDK 17 or higher
-- Maven
-- PostgreSQL (if not using H2)
-- An IDE such as IntelliJ IDEA or VS Code
+### Frontend
 
-## Setup Instructions
-### 1. Clone the repo:
-```shell
-git clone https://github.com/josh-rimes/service-app.git
+* React
+* TypeScript
+* Component-based UI (custom Cards, forms, dashboards)
+* REST API integration
 
-cd backend
-```
+### Backend
 
-### 2. Configure the Database:
-**Option A: PostgreSQL (Recommended)**
+* Spring Boot (Java)
+* RESTful API design
+* JPA / Hibernate
+* Transactional service layer
 
-Create a database:
-```sql
-CREATE DATABASE hotfix;
-```
-Update application.properties (or application.yml):
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/hotfix
-spring.datasource.username=postgres
-spring.datasource.password=your_password
+### Database
 
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-```
+* Relational database (via JPA)
+* Separate entities for users, jobs, quotes, reviews, and bookings
 
-**Option B: H2 (Quick Local Testing)**
-```properties
-spring.datasource.url=jdbc:h2:mem:hotfix
-spring.datasource.driver-class-name=org.h2.Driver
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-spring.h2.console.enabled=true
-```
+---
 
-### 3. Configure JWT
-JWT settings must use a secure key (minimum 256 bits).
-```properties
-jwt.secret=your_very_long_secure_secret_key_at_least_32_chars
-jwt.expiration=86400000
-```
+## Core Functionality
 
-If the key is too short, authentication will fail.
+### Users
 
-### 4. Build the Application
-```shell
-mvn clean install
-```
+* Two roles: **Customer** and **Tradesman**
+* Authentication and role-based access
 
-### 5. Run the Application
-```shell
-mvn spring-boot:run
-```
-The API will start at:
-```terminaloutput
-http://localhost:8080
-```
+### Tradesman Flow
 
-## API Overview
-- `/auth/register` – Register a user
-- `/auth/login` – Authenticate and receive JWT
-- `/jobs` – Job CRUD operations
-- `/quotes` – Quote submission and retrieval
-- `/bookings` – Booking management
+* View open jobs
+* Submit **one quote per job**
+* Track quoted jobs
+* See accepted quotes and upcoming bookings
+* Manage personal profile (bio, details, ratings)
 
-Most endpoints require a valid **Authorization header**:
-```terminaloutput
-Authorization: Bearer <JWT_TOKEN>
-```
+### Customer Flow
 
-## Common Issues & Debugging
-### JWT Key Error
-**Error:**
-```terminaloutput
-The specified key byte array is not secure enough for any JWT HMAC-SHA algorithm
-```
-**Fix:**
+* Post jobs with descriptions
+* Receive multiple quotes from tradesmen
+* Accept a quote to create a booking
+* Leave reviews and ratings after job completion
 
-- Ensure `jwt.secret` is at least 32 characters
-- Restart the backend after changing it
+### Reviews & Ratings
 
-### 403 Forbidden Errors
-**Causes:**
+* Customers can review tradesmen
+* Ratings are aggregated and displayed on tradesman profiles
 
-- Missing `Authorization` header
-- Incorrect role access (CUSTOMER vs TRADESMAN)
-- Expired token
+---
 
-**Fix:**
+## Project Status
 
-- Log in again to get a fresh token
-- Verify role-based annotations in controllers
+This project implements the **core end-to-end functionality** of a trades marketplace:
+job posting → quoting → acceptance → booking → review.
 
-### CORS Errors
+It is designed as a clean, modular foundation in the hope that it can be extended with features like messaging, payments, or notifications.
 
-If the frontend cannot access the backend:
-- Ensure CORS configuration allows `http://localhost:5173`
-- Check `SecurityConfig` for allowed origins and methods
+---
 
-### Entity Serialization Issues (Infinite Loops)
-**Symptoms:**
+## Getting Started
 
-- StackOverflowError
-- Infinite JSON response
+1. Run the Spring Boot backend
+2. Start the React frontend
+3. Access the app in your browser and create a customer or tradesman account
 
-**Fix:**
+---
 
-- Use DTOs instead of returning entities
-- Add @JsonIgnore on bidirectional relationships
-
-### Tradesman / Customer IDs Missing in Responses
-If fields like `tradesmanId` or `customerId` are `null`:
-- Ensure DTO mapping explicitly extracts IDs
-
-Example:
-```java
-quoteResponse.setTradesmanId(quote.getTradesman().getId());
-```
-
-## Useful Dev Tips
-
-- Use Postman or Insomnia to test secured endpoints
-- Enable SQL logging during development
-- Prefer DTOs over exposing entities directly
+Happy fixing with **Hotfix** 🔧
