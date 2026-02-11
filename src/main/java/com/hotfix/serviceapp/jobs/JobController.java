@@ -1,5 +1,8 @@
 package com.hotfix.serviceapp.jobs;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +26,19 @@ public class JobController {
     }
 
     @GetMapping
-    public List<Job> getJobs() {
-        return jobRepository.findAll();
+    public List<Job> getJobs(@RequestParam(required = false) JobStatus status,
+                             @RequestParam(defaultValue = "10") int limit) {
+        Pageable pageable = PageRequest.of(0, limit);
+        if (status != null) {
+            return jobRepository.findByStatus(status, pageable);
+        }
+        return jobRepository.findAll(pageable).getContent();
+    }
+
+    @GetMapping("/my-quotes")
+    public List<Job> getMyQuotedJobs() {
+        com.hotfix.serviceapp.users.User user = (com.hotfix.serviceapp.users.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return jobRepository.findJobsByTradesmanQuote(user.getId());
     }
 
     @GetMapping("/{id}")

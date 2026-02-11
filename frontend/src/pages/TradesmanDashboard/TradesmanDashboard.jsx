@@ -16,10 +16,26 @@ export default function TradesmanDashboard() {
     const [quoteData, setQuoteData] = useState({});
     const [submitting, setSubmitting] = useState(null);
 
+    const loadDashboardData = async () => {
+        try {
+            const [openJobsRes, myQuotesRes] = await Promise.all([
+                api.get("/jobs?status=OPEN&limit=20"),
+                api.get("/jobs/my-quotes")
+            ]);
+
+            // Merge unique jobs
+            const jobMap = new Map();
+            openJobsRes.data.forEach(j => jobMap.set(j.id, j));
+            myQuotesRes.data.forEach(j => jobMap.set(j.id, j));
+
+            setJobs(Array.from(jobMap.values()));
+        } catch (error) {
+            console.log("Failed to load dashboard data", error);
+        }
+    };
+
     useEffect(() => {
-        api.get("/jobs")
-            .then(response => setJobs(response.data))
-            .catch(error => console.log("Failed to load jobs", error));
+        loadDashboardData();
     }, []);
 
     const handleChange = (jobId, field, value) => {
@@ -51,8 +67,7 @@ export default function TradesmanDashboard() {
 
             alert("Quote successfully added!");
 
-            const refreshed = await api.get("/jobs");
-            setJobs(refreshed.data);
+            await loadDashboardData();
 
         } catch (error) {
             console.error("Failed to submit quote", error);
