@@ -5,6 +5,7 @@ import styles from "./Login.module.css"
 import Button from "../../components/Button/Button.jsx";
 import Input from "../../components/Input/Input.jsx";
 import logo from "../../assets/full_logo.png";
+import {useNotification} from "../../components/Notification/NotificationContext.jsx";
 
 
 export default function Login() {
@@ -12,17 +13,23 @@ export default function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { addNotification } = useNotification();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const role = await login(email, password);
+        try {
+            const role = await login(email, password);
 
-        if (role === "CUSTOMER") {
-            navigate("/customer");
-        } else if (role === "TRADESMAN") {
-            navigate("/tradesman");
-        } else {
-            navigate('/');
+            if (role === "CUSTOMER") {
+                navigate("/customer");
+            } else if (role === "TRADESMAN") {
+                navigate("/tradesman");
+            } else {
+                navigate('/');
+            }
+        } catch (error) {
+            console.error("Login failed", error);
+            addNotification("Invalid email or password. Please try again.", "error");
         }
     };
 

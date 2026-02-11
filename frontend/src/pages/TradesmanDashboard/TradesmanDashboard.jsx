@@ -8,6 +8,7 @@ import TextArea from "../../components/TextArea/TextArea.jsx";
 import Input from "../../components/Input/Input.jsx";
 import Card from "../../components/Card/Card.jsx";
 import Empty from "../../components/Empty/Empty.jsx";
+import {useNotification} from "../../components/Notification/NotificationContext.jsx";
 
 export default function TradesmanDashboard() {
     const { user } = useContext(AuthContext);
@@ -15,6 +16,7 @@ export default function TradesmanDashboard() {
     const [jobs, setJobs] = useState([]);
     const [quoteData, setQuoteData] = useState({});
     const [submitting, setSubmitting] = useState(null);
+    const { addNotification } = useNotification();
 
     const loadDashboardData = async () => {
         try {
@@ -52,7 +54,7 @@ export default function TradesmanDashboard() {
         const quote = quoteData[jobId];
 
         if (!quote?.priceEstimate) {
-            alert("Please specify a price");
+            addNotification("Please specify a price", "error");
             return;
         }
 
@@ -65,7 +67,7 @@ export default function TradesmanDashboard() {
                 message: quote.message || ""
             });
 
-            alert("Quote successfully added!");
+            addNotification("Quote successfully added!", "success");
 
             await loadDashboardData();
 
@@ -73,9 +75,9 @@ export default function TradesmanDashboard() {
             console.error("Failed to submit quote", error);
 
             if (error.response?.status === 403) {
-                alert("You are not authorized to submit this quote.");
+                addNotification("You are not authorized to submit this quote.", "error");
             } else {
-                alert("Failed to submit quote. Please try again.");
+                addNotification("Failed to submit quote. Please try again.", "error");
             }
 
         } finally {

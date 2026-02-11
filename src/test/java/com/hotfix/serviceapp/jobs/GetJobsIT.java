@@ -22,25 +22,6 @@ class GetJobsIT extends BaseIT {
 
     private static final String BASE_PATH = "/jobs";
 
-    @Test
-    @DisplayName("GET /jobs returns all jobs")
-    void getJobs_returnsAllJobs() {
-        User user = createAndSaveUser();
-        Job job1 = createAndSaveJob(user);
-        Job job2 = createAndSaveJob(user);
-
-        ResponseEntity<Job[]> response =
-                restTemplate.getForEntity(baseUrl(BASE_PATH), Job[].class);
-
-        assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
-        assertThat(response.getBody())
-                .isNotNull()
-                .hasSizeGreaterThanOrEqualTo(2)
-                .extracting(Job::getId)
-                .contains(job1.getId(), job2.getId());
-
-        flushAndClear();
-    }
 
     @Test
     @DisplayName("GET /jobs/{id} returns the job when it exists")

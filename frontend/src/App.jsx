@@ -6,12 +6,16 @@ import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import CustomerDashboard from "./pages/CustomerDashboard/CustomerDashboard.jsx";
 import TradesmanDashboard from "./pages/TradesmanDashboard/TradesmanDashboard.jsx";
 import TradesmanProfile from "./pages/TradesmanProfile/TradesmanProfile.jsx";
+import {NotificationProvider} from "./components/Notification/NotificationContext.jsx";
+import NotificationContainer from "./components/Notification/Notification.jsx";
 
 
 function App() {
     return (
-        <AuthProvider>
-            <BrowserRouter>
+        <NotificationProvider>
+            <AuthProvider>
+                <NotificationContainer />
+                <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Navigate to="/login" />} />
 
@@ -47,6 +51,7 @@ function App() {
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
+    </NotificationProvider>
     );
 }
 
