@@ -8,6 +8,7 @@ import TextArea from "../../components/TextArea/TextArea.jsx";
 import Input from "../../components/Input/Input.jsx";
 import Card from "../../components/Card/Card.jsx";
 import Empty from "../../components/Empty/Empty.jsx";
+import {useNotification} from "../../components/Notification/NotificationContext.jsx";
 
 export default function TradesmanDashboard() {
     const { user } = useContext(AuthContext);
@@ -15,11 +16,28 @@ export default function TradesmanDashboard() {
     const [jobs, setJobs] = useState([]);
     const [quoteData, setQuoteData] = useState({});
     const [submitting, setSubmitting] = useState(null);
+    const { addNotification } = useNotification();
+
+    const loadDashboardData = async () => {
+        try {
+            const [openJobsRes, myQuotesRes] = await Promise.all([
+                api.get("/jobs?status=OPEN&limit=20"),
+                api.get("/jobs/my-quotes")
+            ]);
+
+            // Merge unique jobs
+            const jobMap = new Map();
+            openJobsRes.data.forEach(j => jobMap.set(j.id, j));
+            myQuotesRes.data.forEach(j => jobMap.set(j.id, j));
+
+            setJobs(Array.from(jobMap.values()));
+        } catch (error) {
+            console.log("Failed to load dashboard data", error);
+        }
+    };
 
     useEffect(() => {
-        api.get("/jobs")
-            .then(response => setJobs(response.data))
-            .catch(error => console.log("Failed to load jobs", error));
+        loadDashboardData();
     }, []);
 
     const handleChange = (jobId, field, value) => {
@@ -36,7 +54,7 @@ export default function TradesmanDashboard() {
         const quote = quoteData[jobId];
 
         if (!quote?.priceEstimate) {
-            alert("Please specify a price");
+            addNotification("Please specify a price", "error");
             return;
         }
 
@@ -49,18 +67,17 @@ export default function TradesmanDashboard() {
                 message: quote.message || ""
             });
 
-            alert("Quote successfully added!");
+            addNotification("Quote successfully added!", "success");
 
-            const refreshed = await api.get("/jobs");
-            setJobs(refreshed.data);
+            await loadDashboardData();
 
         } catch (error) {
             console.error("Failed to submit quote", error);
 
             if (error.response?.status === 403) {
-                alert("You are not authorized to submit this quote.");
+                addNotification("You are not authorized to submit this quote.", "error");
             } else {
-                alert("Failed to submit quote. Please try again.");
+                addNotification("Failed to submit quote. Please try again.", "error");
             }
 
         } finally {

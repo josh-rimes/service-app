@@ -9,5 +9,7 @@ public interface QuoteRepository extends JpaRepository<Quote, Integer> {
 
     List<Quote> findByJobId(Integer jobId);
 
+    List<Quote> findByTradesmanId(Integer tradesmanId);
+
     Optional<Quote> findByJobIdAndTradesmanId(Integer jobId, Integer tradesmanId);
 }

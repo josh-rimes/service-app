@@ -28,4 +28,10 @@ public class QuoteController {
     public List<Quote> getQuotesForJob(@PathVariable Integer jobId) {
         return quoteService.getQuotesForJob(jobId);
     }
+
+    @GetMapping("/my")
+    public List<Quote> getMyQuotes() {
+        User tradesman = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return quoteService.getQuotesForTradesman(tradesman.getId());
+    }
 }

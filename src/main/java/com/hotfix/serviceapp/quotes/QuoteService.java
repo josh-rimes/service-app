@@ -49,4 +49,8 @@ public class QuoteService {
     public List<Quote> getQuotesForJob(Integer jobId) {
         return quoteRepository.findByJobId(jobId);
     }
+
+    public List<Quote> getQuotesForTradesman(Integer tradesmanId) {
+        return quoteRepository.findByTradesmanId(tradesmanId);
+    }
 }

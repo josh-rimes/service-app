@@ -1,0 +1,50 @@
+.container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notification {
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease-out;
+    min-width: 250px;
+    max-width: 400px;
+    font-weight: bold;
+}
+
+.success {
+    color: #faf7ed;
+    background-color: #4caf50;
+    border-left: 5px solid #2e7d32;
+}
+
+.error {
+    color: #faf7ed;
+    background-color: #ba3521;
+    border-left: 5px solid #a62f1e;
+}
+
+.info {
+    color: #faf7ed;
+    background-color: #064b75;
+    border-left: 5px solid #064265;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

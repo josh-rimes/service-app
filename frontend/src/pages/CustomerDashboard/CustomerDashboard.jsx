@@ -8,6 +8,7 @@ import TextArea from "../../components/TextArea/TextArea.jsx";
 import Select from "../../components/Select/Select.jsx";
 import Card from "../../components/Card/Card.jsx";
 import Empty from "../../components/Empty/Empty.jsx";
+import {useNotification} from "../../components/Notification/NotificationContext.jsx";
 
 export default function CustomerDashboard() {
     const { user } = useContext(AuthContext);
@@ -16,6 +17,7 @@ export default function CustomerDashboard() {
     const [accepting, setAccepting] = useState(null);
     const [newJob, setNewJob] = useState({ customer: user, title: "", description: "", location: "", urgency: "NORMAL" });
     const [posting, setPosting] = useState(false);
+    const { addNotification } = useNotification();
 
     useEffect(() => {
         const fetchJobs = async () => {
@@ -38,7 +40,7 @@ export default function CustomerDashboard() {
 
             await api.post(`/jobs/${jobId}/select/${quoteId}`);
 
-            alert("Quote accepted");
+            addNotification("Quote accepted successfully!", "success");
 
             setJobs(prevJobs =>
                 prevJobs.map(job =>
@@ -57,9 +59,9 @@ export default function CustomerDashboard() {
         } catch (err) {
             console.error("Failed to accept quote", err);
             if (err.response?.status === 403) {
-                alert("You are not authorized to accept this quote.");
+                addNotification("You are not authorized to accept this quote.", "error");
             } else {
-                alert("Failed to accept quote. Try again.");
+                addNotification("Failed to accept quote. Please try again.", "error");
             }
         } finally {
             setAccepting(null);
@@ -68,7 +70,7 @@ export default function CustomerDashboard() {
 
     const postJob = async () => {
         if (!newJob.title || !newJob.description || !newJob.location) {
-            alert("Please fill in all required fields.");
+            addNotification("Please fill in all required fields.", "error");
             return;
         }
 
@@ -76,16 +78,16 @@ export default function CustomerDashboard() {
             setPosting(true);
 
             const res = await api.post("/jobs", newJob);
-            alert("Job posted successfully");
+            addNotification("Job posted successfully!", "success");
 
             setJobs(prev => [...prev, res.data]);
             setNewJob({ title: "", description: "", location: "", urgency: "ASAP" });
         } catch (err) {
             console.error("Failed to post job", err);
             if (err.response?.status === 403) {
-                alert("You are not authorized to post a job.");
+                addNotification("You are not authorized to post a job.", "error");
             } else {
-                alert("Failed to post job. Try again.");
+                addNotification("Failed to post job. Please try again.", "error");
             }
         } finally {
             setPosting(false);

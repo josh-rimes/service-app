@@ -8,9 +8,11 @@ import Input from "../../components/Input/Input.jsx";
 import TextArea from "../../components/TextArea/TextArea.jsx";
 import Card from "../../components/Card/Card.jsx";
 import Empty from "../../components/Empty/Empty.jsx";
+import {useNotification} from "../../components/Notification/NotificationContext.jsx";
 
 export default function TradesmanProfile() {
     const { user } = useContext(AuthContext);
+    const { addNotification } = useNotification();
     const [reviews, setReviews] = useState([]);
     const [profile, setProfile] = useState({
         bio: "",
@@ -30,8 +32,13 @@ export default function TradesmanProfile() {
     }, [user.id]);
 
     const save = async () => {
-        await api.put("/tradesman/profile", profile);
-        alert("Profile saved successfully.");
+        try {
+            await api.put("/tradesman/profile", profile);
+            addNotification("Profile saved successfully.", "success");
+        } catch (error) {
+            console.error("Failed to save profile", error);
+            addNotification("Failed to save profile. Please try again.", "error");
+        }
     }
 
     const { logout } = useContext(AuthContext);

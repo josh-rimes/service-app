@@ -6,6 +6,7 @@ import Button from "../../components/Button/Button.jsx";
 import Select from "../../components/Select/Select.jsx";
 import Input from "../../components/Input/Input.jsx";
 import logo from "../../assets/full_logo.png";
+import {useNotification} from "../../components/Notification/NotificationContext.jsx";
 
 
 export default function Register() {
@@ -15,12 +16,22 @@ export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
+    const { addNotification } = useNotification();
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        await register(name, email, password, role);
-
-        navigate('/');
+        if (!name || !email || !password || !role) {
+            addNotification("Please fill in all fields.", "error");
+            return;
+        }
+        try {
+            await register(name, email, password, role);
+            addNotification("Registration successful! You can now log in.", "success");
+            navigate('/');
+        } catch (error) {
+            console.error("Registration failed", error);
+            addNotification("Registration failed. Email might already be in use.", "error");
+        }
     };
 
     return (
