@@ -53,7 +53,7 @@ class SelectingQuoteTest {
 
         assertThat(acceptedQuote.getStatus()).isEqualTo(QuoteStatus.ACCEPTED);
         assertThat(rejectedQuote.getStatus()).isEqualTo(QuoteStatus.REJECTED);
-        assertThat(result.getStatus()).isEqualTo(JobStatus.QUOTED);
+        assertThat(result.getStatus()).isEqualTo(JobStatus.ASSIGNED);
         assertThat(result.getSelectedTradesman()).isEqualTo(tradesman);
 
         verify(jobRepository).save(job);

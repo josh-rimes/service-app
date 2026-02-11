@@ -61,9 +61,9 @@ class GetJobsIT extends BaseIT {
     @Test
     @DisplayName("GET /jobs/{id} fails when job does not exist")
     void getJobById_throws_whenNotFound() {
-        assertThatThrownBy(() ->
-                restTemplate.getForEntity(baseUrl(BASE_PATH + "/999999"), Job.class)
-        ).hasMessageContaining("500");
+        ResponseEntity<String> response =
+                restTemplate.getForEntity(baseUrl(BASE_PATH + "/999999"), String.class);
+        assertThat(response.getStatusCode().value()).isEqualTo(500);
     }
 
     @Test
