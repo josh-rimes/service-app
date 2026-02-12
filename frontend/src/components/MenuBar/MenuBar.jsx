@@ -26,7 +26,7 @@ export default function MenuBar() {
                         </Button>
                     ) : (
                         <Button onClick={() => navigate("/tradesman")} style={{ margin: 0 }}>
-                            Tradesman Dashboard
+                            Dashboard
                         </Button>
                     )
                 )}
