@@ -32,8 +32,6 @@ export default function CustomerDashboard() {
         fetchJobs();
     }, []);
 
-    const { logout } = useContext(AuthContext);
-
     const acceptQuote = async (jobId, quoteId) => {
         try {
             setAccepting(quoteId);
@@ -96,10 +94,6 @@ export default function CustomerDashboard() {
 
     return (
         <div className={styles.dashboard}>
-            <Button variant="logout" onClick={logout}>
-                Logout
-            </Button>
-
             <Card title={<h2>Post a New Job</h2>}>
                 <h4>Title</h4>
                 <Input

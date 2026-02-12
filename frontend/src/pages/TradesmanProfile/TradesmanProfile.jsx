@@ -1,6 +1,5 @@
 import {useContext, useEffect, useState} from "react";
 import api from "../../api/axios.js";
-import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../../auth/AuthContext.jsx";
 import styles from "./TradesmanProfile.module.css";
 import Button from "../../components/Button/Button.jsx";
@@ -41,22 +40,10 @@ export default function TradesmanProfile() {
         }
     }
 
-    const { logout } = useContext(AuthContext);
-
-    const navigate = useNavigate();
-
     if (!profile) return <p>Loading profile...</p>;
 
     return (
         <div className={styles.profile}>
-            <Button onClick={() => navigate("/tradesman")}>
-                Tradesman Dashboard
-            </Button>
-
-            <Button variant="logout" onClick={logout}>
-                Logout
-            </Button>
-
             <Card title={<h2>My Profile</h2>}>
                 <h4>Bio</h4>
                 <div className={styles.bio}>

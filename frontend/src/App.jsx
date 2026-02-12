@@ -6,6 +6,7 @@ import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import CustomerDashboard from "./pages/CustomerDashboard/CustomerDashboard.jsx";
 import TradesmanDashboard from "./pages/TradesmanDashboard/TradesmanDashboard.jsx";
 import TradesmanProfile from "./pages/TradesmanProfile/TradesmanProfile.jsx";
+import AppLayout from "./components/Layout/AppLayout.jsx";
 import {NotificationProvider} from "./components/Notification/NotificationContext.jsx";
 import NotificationContainer from "./components/Notification/Notification.jsx";
 
@@ -23,31 +24,33 @@ function App() {
 
                     <Route path="/register" element={<Register />} />
 
-                    <Route
-                        path="/customer"
-                        element={
-                        <ProtectedRoute role="CUSTOMER">
-                            <CustomerDashboard />
-                        </ProtectedRoute>
-                        }
-                    />
-
-                    <Route
-                        path="/tradesman"
-                        element={
-                        <ProtectedRoute role="TRADESMAN">
-                            <TradesmanDashboard />
-                        </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/tradesman/profile"
-                        element={
-                            <ProtectedRoute role="TRADESMAN">
-                                <TradesmanProfile />
+                    <Route element={<AppLayout />}>
+                        <Route
+                            path="/customer"
+                            element={
+                            <ProtectedRoute role="CUSTOMER">
+                                <CustomerDashboard />
                             </ProtectedRoute>
-                        }
-                    />
+                            }
+                        />
+
+                        <Route
+                            path="/tradesman"
+                            element={
+                            <ProtectedRoute role="TRADESMAN">
+                                <TradesmanDashboard />
+                            </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/tradesman/profile"
+                            element={
+                                <ProtectedRoute role="TRADESMAN">
+                                    <TradesmanProfile />
+                                </ProtectedRoute>
+                            }
+                        />
+                    </Route>
                 </Routes>
             </BrowserRouter>
         </AuthProvider>

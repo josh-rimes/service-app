@@ -2,7 +2,6 @@ import {useContext, useEffect, useState} from "react";
 import api from "../../api/axios.js";
 import {AuthContext} from "../../auth/AuthContext.jsx";
 import styles from "./TradesmanDashboard.module.css";
-import {useNavigate} from "react-router-dom";
 import Button from "../../components/Button/Button.jsx";
 import TextArea from "../../components/TextArea/TextArea.jsx";
 import Input from "../../components/Input/Input.jsx";
@@ -85,10 +84,6 @@ export default function TradesmanDashboard() {
         }
     };
 
-    const navigate = useNavigate();
-
-    const { logout } = useContext(AuthContext);
-
     const hasQuoted = (job) =>
         job.quotes?.some(q => q.tradesman?.id === user.id);
 
@@ -109,14 +104,6 @@ export default function TradesmanDashboard() {
 
     return (
             <div className={styles.dashboard}>
-                <Button onClick={() => navigate("/tradesman/profile")}>
-                    My Profile
-                </Button>
-
-                <Button variant="logout" onClick={logout}>
-                    Logout
-                </Button>
-
                 <div className={styles.threeColumns}>
                     <section>
                         <h2>Open Jobs</h2>
